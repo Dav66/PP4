@@ -1,0 +1,41 @@
+{%extends "base.html.twig"%}
+{% block body %}
+    {% if vide %}
+        <div>
+            <p style="text-align:center">Le Coffre est vide</p>
+        </div>
+    {% else %}
+
+
+
+        <div class="col-xs-12">
+            <div class="container">
+                <div class="col-xs-12">
+                    <table style="width: 100%">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Produit</th>
+                                <th scope="col">Quantite</th>
+                                <th scope="col">Prix</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% set total=0 %}
+                            {% for produit in panier %}
+                                <tr>
+                                    <td>{{produit.idProduit.getNomProduit()|e}}</td>
+                                    <td>{{produit.qte}}</td>
+                                    <td>{{produit.prix}}</td>
+                                </tr>
+                            {% endfor %}
+                        <tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    {% endif %}
+
+
+{% endblock body %}
+

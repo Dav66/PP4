@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" type="image/png" href="/img/ac.png"/>
+        <title>{% block titre %}Reda's Chest{% endblock %}</title>
+        <link rel="stylesheet" href="{{asset("build/css/app.css")}}"/>
+    {% block stylesheets %}{% endblock %}
+</head>
+
+<body>
+    <div class="container-fluid">
+        {#Barre de navigation#}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" style='background-image: url("/img/nav.jpg")'>
+            <img class="navbar-brand" src="img/ac.png" alt="logo">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+
+
+                    {#Boutton Accueil#}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{path ("home")}}">Accueil<span class="sr-only">(current)</span></a>
+                    </li>
+                    {#Si le user est un admin le button admin deviens visible#}
+                    {% if is_granted('IS_AUTHENTICATED_FULLY')%}
+                        {% if app.user.role =="ROLE_ADMIN"%}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin">Admin</a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+
+                    {#Si le user est co alors le panier s'affiche#}
+                    {% if is_granted('IS_AUTHENTICATED_FULLY')%}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/panier">Panier</a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link" href="/produit">Produits</a>
+                        </li>
+                    {% else %}
+                        {#Sinon on affiche que le boutton produits#}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/produit">Produits</a>
+                        </li>
+                    {% endif %} 
+                </ul>
+                
+            {% block bouton %}{% endblock  %} {#bouton se co/se deco#}
+        </div>
+    </nav>
+
+
+
+
+{% block body %}{% endblock %}
+</div>
+{% block javascripts %}{% endblock %}
+<footer>
+
+<p>texte du footer</p>
+
+</footer>
+</body>
+</html>

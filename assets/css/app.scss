@@ -1,0 +1,52 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18 déc. 2017, 14:49:19
+    Author     : d.poncet
+*/
+
+$main-color:linear-gradient(silver,white);
+
+$white:silver;
+@import '~bootstrap/scss/bootstrap';
+body{
+    
+    background-image : url('/img/Bg.jpg');
+    color:$white;
+    background-size: cover;
+}
+.produit {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background: linear-gradient(black,GoldenRod);
+    background-clip: border-box;
+    border-radius: 0.25rem;
+}
+
+.bg-light {
+    background-color: #f8f9fa !important;
+    border-radius: 50px;
+    background-size: cover;
+}
+
+footer{
+
+background:red;
+
+position:absolute;
+
+bottom:0;
+
+width:100%;
+
+padding-top:50px;
+
+height:50px;
+
+}
