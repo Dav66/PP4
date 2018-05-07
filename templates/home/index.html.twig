@@ -1,17 +1,16 @@
 {%extends "base.html.twig"%}
 {% block body %}
+    <div class="container" style="background-color: rgba(255,255,255,0.1)!important">
     {% if is_granted('IS_AUTHENTICATED_FULLY')%}
         <p>Username : {{app.user.username}}</p>
     {%else%}
        
-        <p style="text-align: center">Vous n etes pas conecter</p>
+        <p style="text-align: center">Vous n'étes pas connecter</p>
     {%endif%}
-    <div class="container" style="background-color: rgba(255,255,255,0.1)!important">
- 
-</div>
+        <div style='text-align: center'><img src="img/Acc.jpg" alt="" width=50%/></div>
 {% endblock body %}
 
-{% block bouton %}
+{#{% block bouton %}
     <a class="nav-link float-right" href="/Ajouter">S'inscrire</a>
     {% if not is_granted ('IS_AUTHENTICATED_FULLY')%}
         <a class="nav-link float-right" href="{{path("login")}}">Se connecter</a>
@@ -19,4 +18,4 @@
     {% else %}
         <a class="nav-link float-right" href="{{path("logout")}}">Se deconnecter</a>
     {% endif %}
-    {% endblock bouton %}
+    {% endblock bouton %}#}

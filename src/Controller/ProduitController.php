@@ -47,9 +47,9 @@ class ProduitController extends AbstractController {
                 $qteA = $panier->getQte();
                 $qteMtn = $qteA + 1;
                 $panier->setQte($qteMtn);
-                $prixTotal = $leProduit->getPrixProduit();
-                $prixT = $prixTotal + $prix;
-                $panier->setPrix($prixT);
+                $prixPanier = $panier->getPrix();
+                $prixTotal = $prixPanier + $prix;
+                $panier->setPrix($prixTotal);
                 
             } else {
                 //creer un nv panier
@@ -66,8 +66,7 @@ class ProduitController extends AbstractController {
             $stockMtn = $stock - 1;
             $leProduit->setStockProduit($stockMtn);
           
-            
-            //marche pas 
+           
             $em->persist($leProduit);
          $em->flush();
             //

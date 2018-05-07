@@ -37,6 +37,7 @@
                     {% if is_granted('IS_AUTHENTICATED_FULLY')%}
                         <li class="nav-item">
                             <a class="nav-link" href="/panier">Panier</a>
+                       
                         </li>
                          <li class="nav-item">
                             <a class="nav-link" href="/produit">Produits</a>
@@ -47,9 +48,21 @@
                             <a class="nav-link" href="/produit">Produits</a>
                         </li>
                     {% endif %} 
+                    {% block bouton %}
+    <a class="nav-link float-right text-primary" href="/Ajouter">S'inscrire</a>
+    {% if not is_granted ('IS_AUTHENTICATED_FULLY')%}
+        <a class="nav-link float-right text-primary" href="{{path("login")}}">Se connecter</a>
+        
+    {% else %}
+        <a class="nav-link float-right text-warning" href="{{path("logout")}}">Se deconnecter</a>
+    {% endif %}
+    {% endblock bouton %}
+                    
+                    
+                    
                 </ul>
                 
-            {% block bouton %}{% endblock  %} {#bouton se co/se deco#}
+            {#{% block bouton %}{% endblock  %} {#bouton se co/se deco#}
         </div>
     </nav>
 

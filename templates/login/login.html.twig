@@ -4,15 +4,50 @@
     {% if error%}
         <div>{{ error.messageKey|trans(error.messageData, 'security')}}</div>
     {% endif %}
-<div class="container" style="background-color: rgba(255,255,255,0.1)!important">
-    <label style="text-align:center">Connexion</label>
-    <form action="{{ path('login')}}" method='post' style="text-align:center">
-        <label for="username">Identifiant</label><br>
-        <input type="text" id="username" name="_username" value="{{ last_username }}"/><br>
-        <label for="password">Mot de passe</label><br>
-        <input type="password" id="password" name="_password"/><br>
-        
-        <button type="submit">login</button>
-    </form>
-        </div>
-{% endblock body %}
+    <div class="container" style="background-color: rgba(255,255,255,0.1)!important">
+                <form action="{{ path('login')}}" method='post' style="text-align:center" class="formlogin">
+                    <label style="text-align:center">Connexion</label><br>
+                    <label for="username">Identifiant</label><br>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}"/><br>
+                    <label for="password">Mot de passe</label><br>
+                    <input type="password" id="password" name="_password" {#readonly#}/>
+                    <br>
+                    <script type="text/javascript">
+                        function getRandomInt(max) {
+                            return Math.floor(Math.random() * Math.floor(max));
+                        }
+                        var tab = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+                        var randmax = 10;
+                        var saut = 0;
+                        for (var i = 0; i <= 9; i++) {
+                            var rand = getRandomInt(randmax);
+                            document.write('<input type="button" value="' + tab[rand] + '"class="btnchifr"/>');
+                            if (saut === 4) {
+                                document.write("<br>");
+
+                            }
+                            saut = saut + 1;
+                            tab.splice(rand, 1);
+                            randmax = randmax - 1;
+                        }
+
+                    </script>
+                    <br>
+                    <button type="submit">Connexion</button>
+                </form>
+            </div>
+       
+    {% endblock body %}
+    {% block javascript %}
+        <script type="text/javascript">
+            $(document).ready(function (e) {
+                $(".btnchifr").on("mouseup", function (e) {
+                    $("#password").val($("#password").val() + $(this).val());
+                });
+                $(".reini").on("mouseup", function (e) {
+                    $("#password").val($("").val());
+                });
+            });
+
+        </script>
+    {% endblock  %}
