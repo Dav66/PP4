@@ -6,12 +6,14 @@
     {% endif %}
     <div class="container" style="background-color: rgba(255,255,255,0.1)!important">
                 <form action="{{ path('login')}}" method='post' style="text-align:center" class="formlogin">
-                    <label style="text-align:center">Connexion</label><br>
+                    <legend style="text-align:center">Connexion</legend><br>
                     <label for="username">Identifiant</label><br>
                     <input type="text" id="username" name="_username" value="{{ last_username }}"/><br>
                     <label for="password">Mot de passe</label><br>
                     <input type="password" id="password" name="_password" {#readonly#}/>
                     <br>
+{#                    Marche pas a regarder et modif#}
+{#Permet de taper un code avec des chiffres en bouttons aleatoire#}
                     <script type="text/javascript">
                         function getRandomInt(max) {
                             return Math.floor(Math.random() * Math.floor(max));

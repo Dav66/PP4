@@ -1,18 +1,31 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace App\Controller;
 
+use App\Entity\Commande;
+use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 /**
  * Description of CommandeController
  *
  * @author d.poncet
  */
-class CommandeController {
-    //put your code here
+class CommandeController extends AbstractController {
+    /**
+     * @Route("/commande", name="commande")
+     */
+    public function panier(\Doctrine\ORM\EntityManagerInterface $em) {
+        
+        
+        
+        $user = $this->getUser()->getUsername();
+        $commande = $em->getRepository(Commande::class)->findBy(['userName' => $user]);
+        if ($commande == null) {
+            $vide = "1==1";
+            return $this->render('commande/commande.html.twig', ['commande' => $commande, 'vide' => $vide,]);
+        }
+        $vide = "";
+        return $this->render('commande/commande.html.twig', ['commande' => $commande, 'vide' => $vide]);
+    }
 }

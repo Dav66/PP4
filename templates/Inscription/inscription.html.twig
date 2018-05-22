@@ -1,10 +1,13 @@
 {% extends 'base.html.twig'%}
 {% block body %}
    <div class="container" style="background-color: rgba(255,255,255,0.1)!important">
-                <form action="{{ path('login')}}" method='post' style="text-align:center" class="formlogin"> 
+                <form action="{{ path('login')}}" method='post' style="text-align:center" class="formlogin">
+                    <legend>Inscription</legend>
+       
     {{ form_start(form, {'attr':{'id':'formFun'}})}}
     {{form_widget(form)}}
     {{form_end(form)}}
+ 
     </form>
     </div>
 {% endblock %}    

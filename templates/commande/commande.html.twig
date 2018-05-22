@@ -1,0 +1,10 @@
+{%extends "base.html.twig"%}
+{% block body %}
+{#    Si le pas de commandes#}
+    {% if vide %}
+        <legend style="text-align:center"> Liste des commandes</legend>
+        <div>
+            <p style="text-align:center">Pas de commandes !</p>
+        </div>
+        {% endif %}
+{% endblock body %}

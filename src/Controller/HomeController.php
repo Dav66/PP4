@@ -29,23 +29,6 @@ public function indexController(){
     
     
 }
-    /**
-     * @Route("/visiteur",name="visiteur")
-     * @return Response
-     */
-
-public function visisteurController(){
-    return $this->render('visiteur/visiteur.html.twig');
-    
-}
-
-/**
-     * @Route("/perso",name="perso")
-     * @return Response
-     */
-
-public function persoController(){
-    return $this->render('perso/perso.html.twig');
-}
+  
 
 }

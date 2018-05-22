@@ -13,16 +13,16 @@ namespace App\Controller;
 class InscriptionController extends \Symfony\Bundle\FrameworkBundle\Controller\AbstractController{
     /**
      * 
-     * @Route("/Ajouter",name="ajouter")
+     * @Route("/Inscription",name="inscription")
      */
     
-    public function Ajouter (\Doctrine\ORM\EntityManagerInterface $em, Request $request) {
+    public function Inscription (\Doctrine\ORM\EntityManagerInterface $em, Request $request) {
         $unUser = new User ();
         $form = $this->createFormBuilder($unUser)
                 ->add('userName',  \Symfony\Component\Form\Extension\Core\Type\TextType::class, ["label"=>"Identifiant"])
                 ->add('password',  \Symfony\Component\Form\Extension\Core\Type\TextType::class, ["label"=>"Mot de passe"])
                 ->add('email')
-                ->add ('Enregistrer', \Symfony\Component\Form\Extension\Core\Type\SubmitType::class, array('label' => "Création de l'employé", "attr" => array("class"=> "btn-success")))
+                ->add ('Enregistrer', \Symfony\Component\Form\Extension\Core\Type\SubmitType::class, array('label' => "Valider", "attr" => array("class"=> "btn-success")))
                 ->getForm()
                 ;
         $form->handleRequest ($request);

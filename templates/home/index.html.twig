@@ -2,14 +2,18 @@
 {% block body %}
     <div class="container" style="background-color: rgba(255,255,255,0.1)!important">
     {% if is_granted('IS_AUTHENTICATED_FULLY')%}
-        <p>Username : {{app.user.username}}</p>
+        <p style="text-align: center">Bienvenue au Bazard {{app.user.username}} !</p>
     {%else%}
        
-        <p style="text-align: center">Vous n'étes pas connecter</p>
+        <p style="text-align: center">Vous n'étes pas membre du Bazard</p>
     {%endif%}
         <div style='text-align: center'><img src="img/Acc.jpg" alt="" width=50%/></div>
+{#        A ajouter Carousel et mep accueil#}
 {% endblock body %}
 
+    
+    
+    
 {#{% block bouton %}
     <a class="nav-link float-right" href="/Ajouter">S'inscrire</a>
     {% if not is_granted ('IS_AUTHENTICATED_FULLY')%}

@@ -1,22 +1,26 @@
 {%extends "base.html.twig"%}
 {% block body %}
+{#    Si le le panier est vide#}
     {% if vide %}
         <div>
-            <p style="text-align:center">Le Coffre est vide</p>
+            <p style="text-align:center">Le Coffre est vide !</p>
         </div>
     {% else %}
-
+{#Si le panier contient des produits que l'utilisateur a ajouter au panier #}
 
 
         <div class="col-xs-12">
-            <div class="container">
+            <legend style="text-align:center"> Liste des produits sélectionnés</legend>
+            <div class="container" style="background-color: rgba(255,255,255,0.1)!important">
                 <div class="col-xs-12">
                     <table style="width: 100%">
                         <thead class="thead-dark">
+{#                            On affiche le tableau des produits du panier #}
                             <tr>
                                 <th scope="col">Produit</th>
                                 <th scope="col">Quantite</th>
-                                <th scope="col">Prix</th>
+                                <th scope="col">Prix Unitaire</th>
+                                <th scope="col">Prix Total</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -25,16 +29,19 @@
                                 <tr>
                                     <td>{{produit.idProduit.getNomProduit()|e}}</td>
                                     <td>{{produit.qte}}</td>
-                                    <td>{{produit.prix}}</td>
+                                    <td>{{produit.idProduit.getPrixProduit()|e}} €</td>
+                                    <td>{{produit.prix}} €</td>
                                 </tr>
+{#                               ---Afaire  Ajout de bouttons + et - pour enlever ou ajouter des produits#}
                             {% endfor %}
                         <tbody>
                     </table>
                 </div>
             </div>
         </div>
+    </div>
 
-    {% endif %}
+{% endif %}
 
 
 {% endblock body %}
