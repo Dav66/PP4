@@ -1,45 +1,53 @@
 {%extends "base.html.twig"%}
 {% block body %}
-    {#<img src="{{boutique.photo_produit[]}}" alt=""/>#}
 
-<legend style="text-align:center">Les Reliques du Bazard</legend>
+    <legend style="text-align:center">Les Reliques du Bazard</legend>
     <div class="container" style="background-color: rgba(255,255,255,0.1)!important">
+
+        {#Affiche les buttons des diffrentes categories de produits#}
+        {% set foo = 3 %}
+        <legend style="text-align:center">Categories</legend>
+        <div style="text-align:center">
+            {#Affiche tout les produits #}
+            <a class="btn btn-sm btn-outline-secondary col-lg-3" href="/produit">Tous</a>
+            {#Affiche les produits filtrés par leur categories #}
+            {% for unecateg in lescategs %}
+                <a class="btn btn-sm btn-outline-secondary col-lg-3" href="/produit/{{unecateg.idCategorie|e}}">{{unecateg.idCategorie|e}}</a>
+            {%endfor%}
+        </div>
+
+
+        {#Affichage et mise en page des produits present dans la BDD#}
         {% set case = 4%}
-{% for produits in produit %}
-    <legend style="text-align:center">Categories</legend>
-    <div style="text-align:center">
-        <a type="button" class="btn btn-sm col-lg-3" href="">Tout</a>
-    <a type="button" class="btn btn-sm col-lg-3" href="">Figurine</a>
-    <a type="button" class="btn btn-sm col-lg-3" href="">Buste</a>
-    </div>
-    {%if case == 4%}
-        <div class="row" style="text-align:center">
-            {%set case=0%}
-            {%endif%}
-                    <div class="produit mb-3 box-shadow" style="width: 250px; border-radius:25px; margin: 15px; border: outset;">
-                        <img class="card-img-top" src="{{produits.photoProduit}}" alt="Card image cap" style="border-radius:20px;">
-                        <div class="card-body">
-                            <p class="card-text" style="color:silver; font-weight:bolder;" >{{produits.nomProduit}}</p>
-                            <p class="card-text" style="color:white"></p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                {% if is_granted('IS_AUTHENTICATED_FULLY')%}
+        {% for produits in produit %}
+            {%if case == 4%}
+                <div class="row" style="text-align:center">
+                    {%set case=0%}
+                {%endif%}
+                <div class="produit mb-3 box-shadow" style="width: 250px; border-radius:25px; margin: 15px; border: outset;">
+                    <img class="card-img-top" src="{{produits.photoProduit}}" alt="Card image cap" style="border-radius:20px;">
+                    <div class="card-body">
+                        <p class="card-text" style="color:silver; font-weight:bolder;" >{{produits.nomProduit}}</p>
+                        <p class="card-text" style="color:white"></p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            {% if is_granted('IS_AUTHENTICATED_FULLY')%}
                                 <div class="btn-group">
                                     <a type="button" class="btn btn-sm btn-outline-secondary " href="/ajoutPanier/{{produits.id}}">Ajouter au panier</a>
-                 
+
                                 </div>
-                                {% endif%}
-                                <small class="text-muted" style="color:silver; font-weight:bolder; text-align: right">{{produits.prixProduit}} €</small>
-                            </div>
+                            {% endif%}
+                            <small class="text-muted" style="color:silver; font-weight:bolder; text-align: right">{{produits.prixProduit}} €</small>
                         </div>
                     </div>
-                     {%if case == 3%}       
                 </div>
-           
- 
-{%endif%}
-{%set case = case+1%}
-&nbsp;
+                {%if case == 3%}       
+                </div>
 
-    {% endfor%} 
+
+            {%endif%}
+            {%set case = case+1%}
+            &nbsp;
+
+        {% endfor%} 
     </div>
 {% endblock body %}

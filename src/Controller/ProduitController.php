@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Produit;
 use App\Entity\Panier;
+use App\Entity\Categorie;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,14 +16,34 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 class ProduitController extends AbstractController {
 
-//affiche tout les produits sur la page produits
+    
+    
+    
     /**
-     * @Route("/produit", name="produit")
+     * @Route("/produit/{categ}",defaults={"categ"=null},name="produit")
      */
-    public function apiTotoMethodClassique(EntityManagerInterface $em) {
-        $produitTab = $em->getRepository(Produit::class)->findAll();
-        return$this->render("produit/produit.html.twig", array('produit' => $produitTab));
+    public function apiTotoMethodeClassique($categ, EntityManagerInterface $em) {
+        if ($categ) {
+            $unProduit = $em->getRepository(Produit::class)->findByIdCategorie($categ);
+        } else {
+            $unProduit = $em->getRepository(Produit::class)->findAll();
+        }
+        $lesCategs = $em->getRepository(Categorie::class)->findAll();
+        //getRepository(users::class) est l'equivalent de select * from users
+        return $this->render("produit/produit.html.twig", array('produit' => $unProduit, 'lescategs' => $lesCategs));
+        //$unToto[0] -> pour recup juste le premier objet
+        //$unToto -> pour recup le tableau de tout les toto et dans le twig faut faire un for
     }
+    
+    
+////affiche tout les produits sur la page produits
+//    /**
+//     * @Route("/produit", name="produit")
+//     */
+//    public function apiTotoMethodClassique(EntityManagerInterface $em) {
+//        $produitTab = $em->getRepository(Produit::class)->findAll();
+//        return$this->render("produit/produit.html.twig", array('produit' => $produitTab));
+//    }
 
 //Permet d'ajouter des produits dans le panier    
     /**
@@ -80,5 +101,15 @@ class ProduitController extends AbstractController {
             return $this->redirectToRoute("produit");
         }
     }
-
+    
+    
+    /**
+     * @Route("/filtrecateg/{categ}",name="filtrecateg")
+     */
+    public function filtrecateg($categ, EntityManagerInterface $em) {
+        $produits = $em->getRepository(Produit::class)->findByIdCategorie($categ);
+        return $this->render("produit/produit.html.twig", array('produit' => $produits));
+    }
 }
+
+

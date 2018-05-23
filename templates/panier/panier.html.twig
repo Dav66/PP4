@@ -1,48 +1,65 @@
 {%extends "base.html.twig"%}
 {% block body %}
-{#    Si le le panier est vide#}
+    {#    Si le le panier est vide#}
     {% if vide %}
         <div>
             <p style="text-align:center">Le Coffre est vide !</p>
         </div>
     {% else %}
-{#Si le panier contient des produits que l'utilisateur a ajouter au panier #}
-
+        {#Si le panier contient des produits que l'utilisateur a ajouter au panier #}
 
         <div class="col-xs-12">
             <legend style="text-align:center"> Liste des produits sélectionnés</legend>
+            {#---A faire Button qui supprime tout les produits du panier#}
+            
             <div class="container" style="background-color: rgba(255,255,255,0.1)!important">
                 <div class="col-xs-12">
                     <table style="width: 100%">
                         <thead class="thead-dark">
-{#                            On affiche le tableau des produits du panier #}
-                            <tr>
-                                <th scope="col">Produit</th>
-                                <th scope="col">Quantite</th>
-                                <th scope="col">Prix Unitaire</th>
-                                <th scope="col">Prix Total</th>
+                            {#On affiche le tableau des produits du panier #}
+                            <tr style="text-align: center;background-color: #696969;">
+                                <th scope="col"><legend class="text-gold">Produit</legend></th>
+                                <th scope="col"><legend class="text-gold">Quantite</legend></th>
+                                <th scope="col"><legend class="text-gold">Prix Unitaire</legend></th>
+                                <th scope="col"><legend class="text-gold">Prix Cumulé</legend></th>
                             </tr>
                         </thead>
                         <tbody>
                             {% set total=0 %}
                             {% for produit in panier %}
-                                <tr>
-                                    <td>{{produit.idProduit.getNomProduit()|e}}</td>
-                                    <td>{{produit.qte}}</td>
-                                    <td>{{produit.idProduit.getPrixProduit()|e}} €</td>
-                                    <td>{{produit.prix}} €</td>
+                                <tr class="text-black" style="text-align: center;background-color: white" >
+                                    <td style="color: black">{{produit.idProduit.getNomProduit()|e}}</td>
+                                    <td style="color: black"> {{produit.qte}}</td>
+                                    <td style="color: black">{{produit.idProduit.getPrixProduit()|e}} €</td>
+                                    <td style="color: black">{{produit.prix}} €</td>
+                                    <td>
+                                        {#<button type="button" class="btn btn-sm btn-outline-secondary" disabled="disabled">+</button>#}
+                                        <a type="button" class="btn btn-sm btn-outline-secondary col-lg-3 text-gold"href="" style="background-color:black;">+</a>
+                                        <a type="button" class="btn btn-sm btn-outline-secondary col-lg-3 text-gold"href="" style="background-color:black;">-</a>
+                                    </td>
+                                    <td>
+                                        <a href="" style="font-size: 11px;">Supprimer</a>
+                                    </td>
                                 </tr>
-{#                               ---Afaire  Ajout de bouttons + et - pour enlever ou ajouter des produits#}
                             {% endfor %}
+                            <tr>
+                                    <th scope="col"><legend class="text-gold">Prix Total</legend></th>
+                        </tr>
+                        <tr>
+                        <td style="color: black"></td>
+                        </tr>
                         <tbody>
                     </table>
                 </div>
             </div>
         </div>
-    </div>
+                        
+
 
 {% endif %}
-
+<div class="col-lg-4">
+            <a class="btn btn-sm btn-outline-secondary col-lg-3 text-gold"href="" style="background-color:black;">Vider le coffre</a>
+</div>
 
 {% endblock body %}
 
