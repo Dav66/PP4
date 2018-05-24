@@ -28,22 +28,26 @@
                             {% set total=0 %}
                             {% for produit in panier %}
                                 <tr class="text-black" style="text-align: center;background-color: white" >
-                                    <td style="color: black">{{produit.idProduit.getNomProduit()|e}}</td>
+                            <td style="color: black">{{produit.idProduit.getNomProduit()|e}}</td>
                                     <td style="color: black"> {{produit.qte}}</td>
                                     <td style="color: black">{{produit.idProduit.getPrixProduit()|e}} €</td>
                                     <td style="color: black">{{produit.prix}} €</td>
                                     <td>
-                                        {#<button type="button" class="btn btn-sm btn-outline-secondary" disabled="disabled">+</button>#}
-                                        <a type="button" class="btn btn-sm btn-outline-secondary col-lg-3 text-gold"href="" style="background-color:black;">+</a>
-                                        <a type="button" class="btn btn-sm btn-outline-secondary col-lg-3 text-gold"href="" style="background-color:black;">-</a>
+                                        {#<a type="button" class="btn btn-sm btn-outline-secondary col-lg-3 text-gold" disabled="disabled" style="background-color:black;">+</a>
+                                         <a type="button" class="btn btn-sm btn-outline-secondary col-lg-3 text-gold" disabled="disabled" style="background-color:black;">-</a>#}
+
+                                        <a type="button" class="btn btn-sm btn-outline-secondary col-lg-3 text-gold"href="" style="background-color:black; text-align: center;">+</a>
+                                        <a type="button" class="btn btn-sm btn-outline-secondary col-lg-3 text-gold"href="" style="background-color:black; text-align: center;">-</a>
+{#        <a type="button" class="btn btn-sm btn-outline-secondary col-lg-3 text-gold"href="/retireExemplaireProdPanier/{{path ("retireExemplaireProdPanier",{'id':produit.id,'user':produit.user})}}" style="background-color:black">-</a>#}
                                     </td>
                                     <td>
-                                        <a href="" style="font-size: 11px;">Supprimer</a>
+                                        <a href="{#{{ path('supprPanier', { 'id': produit.getIdProduit.getId }) }}/retireExemplaireProdPanier/{{produit.idProduit}}#}" style="font-size: 11px;">Supprimer</a>
                                     </td>
                                 </tr>
+                                {% set total = total + produit.prix|e %}
                             {% endfor %}
                             <tr>
-                                    <th scope="col"><legend class="text-gold">Prix Total</legend></th>
+                                    <th scope="col"><legend class="text-gold">Prix Total : {{total}}€ </legend></th>
                         </tr>
                         <tr>
                         <td style="color: black"></td>

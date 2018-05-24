@@ -32,7 +32,7 @@ security:
         ROLE_ADMIN: ROLE_USER           
         
     access_control: 
-        - { path: ^/perso, roles: ROLE_ADMIN}
+        - { path: ^/admin, roles: ROLE_ADMIN}
         - { path: ^/visiteur, roles: ROLE_USER}
 
             # activate different ways to authenticate

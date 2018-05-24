@@ -1,19 +1,21 @@
 {%extends "base.html.twig"%}
 {% block body %}
     <div class="container" style="background-color: rgba(255,255,255,0.1)!important">
-    {% if is_granted('IS_AUTHENTICATED_FULLY')%}
-        <p style="text-align: center">Bienvenue au Bazard {{app.user.username}} !</p>
-    {%else%}
-       
-        <p style="text-align: center">Vous n'étes pas membre du Bazard</p>
-    {%endif%}
+        {# Si l'utilisateur est connecté#}
+        {% if is_granted('IS_AUTHENTICATED_FULLY')%}
+            <p style="text-align: center">Bienvenue au Bazar {{app.user.username}} !</p>
+        {%else%}
+            {# Non connecté#}
+            <p style="text-align: center">Vous n'étes pas membre du Bazar</p>
+        {%endif%}
         <div style='text-align: center'><img src="img/Acc.jpg" alt="" width=50%/></div>
-{#        A ajouter Carousel et mep accueil#}
+            {#        A ajouter Carousel et mep accueil#}
+    </div>
 {% endblock body %}
 
-    
-    
-    
+
+
+
 {#{% block bouton %}
     <a class="nav-link float-right" href="/Ajouter">S'inscrire</a>
     {% if not is_granted ('IS_AUTHENTICATED_FULLY')%}
