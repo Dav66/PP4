@@ -1,18 +1,24 @@
 {%extends "base.html.twig"%}
 {% block body %}
 
-    <legend style="text-align:center">Les Reliques du Bazar</legend>
+    <legend style="text-align:center">Les Reliques des coffres d'Héka</legend>
+    
     <div class="container" style="background-color: rgba(255,255,255,0.1)!important">
+        <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Recherche">
+
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
+                </form>
 
         {#Affiche les buttons des diffrentes categories de produits#}
         {% set foo = 3 %}
         <legend style="text-align:center">Categories</legend>
         <div style="text-align:center">
             {#Affiche tout les produits #}
-            <a class="btn btn-sm btn-outline-secondary col-lg-3" href="/produit">Tous</a>
+            <a class="btn btn-sm btn-outline-secondary col-lg-3 text-gold" style='background-color: black' href="/produit">Tous</a>
             {#Affiche les produits filtrés par leur categories #}
             {% for unecateg in lescategs %}
-                <a class="btn btn-sm btn-outline-secondary col-lg-3" href="/produit/{{unecateg.idCategorie|e}}">{{unecateg.idCategorie|e}}</a>
+                <a class="btn btn-sm btn-outline-secondary col-lg-3 text-gold" style="background-color: black" href="/produit/{{unecateg.idCategorie|e}}">{{unecateg.idCategorie|e}}</a>
             {%endfor%}
         </div>
 
@@ -32,7 +38,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             {% if is_granted('IS_AUTHENTICATED_FULLY')%}
                                 <div class="btn-group">
-                                    <a type="button" class="btn btn-sm btn-outline-secondary " href="/ajoutExemplaireProdPanier/{{produits.id}}">Ajouter au panier</a>
+                                    <a type="button" class="btn btn-sm btn-outline-secondary text-gold" style="background-color: black" href="/ajoutExemplaireProdPanier/{{produits.id}}">Ajouter au panier</a>
                                  
 
                                 </div>

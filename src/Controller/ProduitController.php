@@ -27,18 +27,11 @@ class ProduitController extends AbstractController {
             $unProduit = $em->getRepository(Produit::class)->findAll();
         }
         $lesCategs = $em->getRepository(Categorie::class)->findAll();
-        //getRepository(users::class) est l'equivalent de select * from users
+
         return $this->render("produit/produit.html.twig", array('produit' => $unProduit, 'lescategs' => $lesCategs));
-        //$unToto[0] -> pour recup juste le premier objet
-        //$unToto -> pour recup le tableau de tout les toto et dans le twig faut faire un for
+
     }
-/**
-         * @Route("/filtrecateg/{categ}",name="filtrecateg")
-         */
-        public function filtrecateg($categ, EntityManagerInterface $em) {
-            $produits = $em->getRepository(Produit::class)->findByIdCategorie($categ);
-            return $this->render("produit/produit.html.twig", array('produit' => $produits));
-        }
+
 
 //    /**
 //     * @Route("/retireExemplaireProd/{id}",name="retireExemplaireProd")

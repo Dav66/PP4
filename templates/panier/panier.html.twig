@@ -3,13 +3,15 @@
     {#    Si le le panier est vide#}
     {% if vide %}
         <div>
-            <p style="text-align:center">Le Coffre est vide !</p>
+            
+            <p style="text-align:center">Mon Coffre est vide !</p>
+ 
         </div>
     {% else %}
         {#Si le panier contient des produits que l'utilisateur a ajouter au panier #}
 
         <div class="col-xs-12">
-            <legend style="text-align:center"> Liste des produits sélectionnés</legend>
+            <legend style="text-align:center"> Liste des Reliques dans mon coffre</legend>
             {#---A faire Button qui supprime tout les produits du panier#}
             
             <div class="container" style="background-color: rgba(255,255,255,0.1)!important">
@@ -61,8 +63,10 @@
 
 
 {% endif %}
+
 <div class="col-lg-4">
             <a class="btn btn-sm btn-outline-secondary col-lg-3 text-gold"href="" style="background-color:black;">Vider le coffre</a>
+   
 </div>
 
 {% endblock body %}

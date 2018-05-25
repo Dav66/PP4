@@ -2,28 +2,26 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        {# Icon et titre de l'onglet du site#}
         <link rel="icon" type="image/png" href="/img/ac.png"/>
-        <title>{% block titre %}Reda's Chest{% endblock %}</title>
+        <title>{% block titre %}Reda's Bazar{% endblock %}</title>
         <link rel="stylesheet" href="{{asset("build/css/app.css")}}"/>
     {% block stylesheets %}{% endblock %}
 </head>
 
 <body>
     <div class="container-fluid">
-        
-        
-        
-        
+
         {#Barre de navigation#}
         {#Pb de navbar sur tel et responsive#}
         <nav class="navbar navbar-expand-lg navbar-light bg-light" style='background-image: url("/img/nav.jpg")'>
             <img class="navbar-brand" src="img/ac.png" alt="logo">
             {#Boutton Accueil#}
-            <a class="navbar-brand nav-link"href="{{path ("home")}}">Reda's Chest<span class="sr-only">(current)</span></a>
+            <a class="navbar-brand nav-link"href="{{path ("home")}}">Reda's Bazar<span class="sr-only">(current)</span></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
+
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
@@ -38,69 +36,59 @@
 
                     {#Si l'utilisateur est connecté alors le panier s'affiche#}
                     {% if is_granted('IS_AUTHENTICATED_FULLY')%}
-                        {#Boutton produits: affiche la liste des produit present dans la BDD#}
-                         <li class="nav-item">
+                        {#Boutton produits: affiche la liste des produits present dans la BDD#}
+                        <li class="nav-item">
                             <a class="nav-link" href="/produit">Produits</a>
                         </li> 
-                        
+                        {#Boutton panier: affiche la liste des produits present du panier de l'utilisateur#}
                         <li class="nav-item">
                             <a class="nav-link" href="/panier">Panier</a>
-                       
+                            {#Boutton commandes: affiche la liste des des commandes effectuées de l'utilisateur#}
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/commande">Commandes</a>
-                       
+
                         </li>
-                        
+
                     {% else %}
-                        
+
                         {#Sinon on affiche que le boutton produits#}
                         <li class="nav-item">
                             <a class="nav-link" href="/produit">Produits</a>
                         </li>
                     {% endif %} 
                     {% block bouton %}
-                        
+
                         {#Boutton inscription: creer un nouvel utilisateur dans la BDD#}
-    <a class="nav-link float-right text-primary" href="/Inscription">S'inscrire</a>
-    {% if not is_granted ('IS_AUTHENTICATED_FULLY')%}
-        <a class="nav-link float-right text-primary" href="{{path("login")}}">Se connecter</a>
-        
-    {% else %}
-        <a class="nav-link float-right text-warning" href="{{path("logout")}}">Se deconnecter</a>
-    {% endif %}
-    {% endblock bouton %} 
+                        <a class="nav-link float-right text-primary" href="/Inscription">S'inscrire</a>
+                        {% if not is_granted ('IS_AUTHENTICATED_FULLY')%}
+                            <a class="nav-link float-right text-primary" href="{{path("login")}}">Se connecter</a>
+
+                        {% else %}
+                            <a class="nav-link float-right text-warning" href="{{path("logout")}}">Se deconnecter</a>
+                        {% endif %}
+                    {% endblock bouton %} 
                 </ul>
-    
-{#                Pas fonctionnel#}
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Recherche">
 
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
-    </form>
-                
-            {#{% block bouton %}{% endblock  %} {#bouton se co/se deco#}
-        </div>
-    </nav>
-       {#  <div class="btn-group">
-  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Menu déroulant <span class="caret"></span>
-  <button>
-  <ul class="dropdown-menu">
-     <li><a href="#" title="Lien 1">Lien 1</a></li>
-     <li><a href="#" title="Lien 2">Lien 2</a></li>
-     <li><a href="#" title="Lien 3">Lien 3</a></li>
-     <li role="separator" class="divider"< </li>
-     <li><a href="#" title="Lien 4">Lien 4></a></li>
-  </ul>
-</div>#}
+                {#                Pas fonctionnel#}
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Recherche">
 
-{% block body %}{% endblock %}
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
+                </form>
+
+                {#{% block bouton %}{% endblock  %} {#bouton se co/se deco#}
+            </div>
+        </nav>
+        <div style="padding-top: 100px;"></div>
+
+    {% block body %}{% endblock %}
 </div>
+
 {% block javascripts %}{% endblock %}
-<footer style='background-image: url("/img/nav.jpg")'>
 
-<p class='text-warning'>texte du footer</p>
-
+<footer class="footer">
+    <legend class="text-gold" style="text-align: center">texte du footer</legend>
 </footer>
 </body>
 </html>

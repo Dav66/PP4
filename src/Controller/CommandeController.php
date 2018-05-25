@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Commande;
+use App\Entity\Panier;
+use App\Entity\Produits;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,7 +17,7 @@ class CommandeController extends AbstractController {
     /**
      * @Route("/commande", name="commande")
      */
-    public function panier(\Doctrine\ORM\EntityManagerInterface $em) {
+    public function commande(EntityManagerInterface $em) {
         
         
         
@@ -28,4 +30,6 @@ class CommandeController extends AbstractController {
         $vide = "";
         return $this->render('commande/commande.html.twig', ['commande' => $commande, 'vide' => $vide]);
     }
+    
+    
 }

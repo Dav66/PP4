@@ -70,7 +70,7 @@ class PanierController extends AbstractController {
                 $panier->setIdProduit($leProduit);
                 $panier->setPrix($leProduit->getPrixProduit());
                 $panier->setIdUser($this->getUser());
-                
+             
             }
             //on enleve un exemplaire du stock du produit
             $stockMoins = $stock - 1;
@@ -92,8 +92,8 @@ class PanierController extends AbstractController {
     
     
 
- //   /**
- //    * @Route("/retireExemplaireProdPanier/{id}",name="retireExemplaireProdPanier")
+//   /**
+//    * @Route("/retireExemplaireProdPanier/{id}",name="retireExemplaireProdPanier")
 //    */
 //    public function retireExemplaireProdPanier($id, EntityManagerInterface $em) {
 //       $user = $this->getUser()->getUsername();
