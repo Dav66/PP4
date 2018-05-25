@@ -12,17 +12,22 @@ class Commande {
     /**
      * @var int
      *
-     * @ORM\Column(name="num_commande", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $numCommande;
+    private $id;
     
     /**
      * @var string
      *
-     * @ORM\Column(name="id_user", type="string", nullable=false)
-     * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="user")
+     * @ORM\Column(name="num_commande", type="integer", nullable=false)
+     */
+    private $numCommande;
+    
+    /**
+     * @var user
+     * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({
      * @ORM\JoinColumn(name="user_name", referencedColumnName="user_name")
      * })
@@ -32,11 +37,8 @@ class Commande {
     
     
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_produit", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="produit")
+     * @var produit
+     * @ORM\ManyToOne(targetEntity="Produit")
      * @ORM\JoinColumns({
      * @ORM\JoinColumn(name="id_produit", referencedColumnName="id")
      * })
@@ -65,11 +67,21 @@ class Commande {
      */
     private $date;
     
+ /**
+     * @var bool
+     *
+     * @ORM\Column(name="est_valid", type="boolean", nullable=false)
+     */
+    public $estValid;   
+    
     function __construct() {
         
     }
 
-    
+    function getId() {
+        return $this->id;
+    }
+
     function getNumCommande() {
         return $this->numCommande;
     }
@@ -94,15 +106,23 @@ class Commande {
         return $this->date;
     }
 
+    function getEstValid() {
+        return $this->estValid;
+    }
+
+    function setId($id) {
+        $this->id = $id;
+    }
+
     function setNumCommande($numCommande) {
         $this->numCommande = $numCommande;
     }
 
-    function setserName($userName) {
+    function setUserName(User $userName) {
         $this->userName = $userName;
     }
 
-    function setIdProduit($idProduit) {
+    function setIdProduit(Produit $idProduit) {
         $this->idProduit = $idProduit;
     }
 
@@ -114,8 +134,12 @@ class Commande {
         $this->qte = $qte;
     }
 
-    function setDate(date $date) {
+    function setDate($date) {
         $this->date = $date;
+    }
+
+    function setEstValid($estValid) {
+        $this->estValid = $estValid;
     }
 
 

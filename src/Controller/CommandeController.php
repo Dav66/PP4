@@ -4,10 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Commande;
 use App\Entity\Panier;
-use App\Entity\Produits;
+use App\Entity\Produit;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 /**
  * Description of CommandeController
  *
@@ -30,6 +31,9 @@ class CommandeController extends AbstractController {
         $vide = "";
         return $this->render('commande/commande.html.twig', ['commande' => $commande, 'vide' => $vide]);
     }
+    
+   
+    
     
     
 }

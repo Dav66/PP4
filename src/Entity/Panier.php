@@ -1,4 +1,4 @@
-<?php
+<?php 
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -10,11 +10,24 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  */
 class Panier {
+    
+    
     /**
      * @var int
      *
-    
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id; 
+
+    
+    /**
+
+     *
+    @var produit
+
+     * 
      * @ORM\ManyToOne(targetEntity="Produit")
      * @ORM\JoinColumns({
      * @ORM\JoinColumn(name="id_produit", referencedColumnName="id")
@@ -23,14 +36,15 @@ class Panier {
     private $idProduit;
     
     /**
-     * @var int
+
      *
-     * @ORM\Id
+     *      @var user
+
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({
      * @ORM\JoinColumn(name="id_user", referencedColumnName="user_name")
      * })
-     */
+     */    
     private $idUser;
     
 /**
@@ -50,6 +64,10 @@ class Panier {
     function __construct() {
         
     }
+    function getId() {
+        return $this->id;
+    }
+    
     function getIdProduit() {
         return $this->idProduit;
     }
@@ -64,6 +82,9 @@ class Panier {
     
         function getPrix() {
         return $this->prix;
+    }
+    function setId($id) {
+        $this->id = $id;
     }
 
     function setIdProduit($idProduit) {
@@ -84,6 +105,11 @@ class Panier {
     }
 
 
+
+    
+    
+
+    
 
 
 

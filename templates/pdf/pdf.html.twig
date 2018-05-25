@@ -1,0 +1,38 @@
+{% block body %}
+    <div class="container" >
+
+        <div class='col-xs-12'>
+            {% set numcom=commande[0].numCommande %}
+            {% set first=1 %}
+            {% set total=0 %}
+            {% for produit in commande %}
+                {%if produit.estValid == 1 %}
+                    {% set valid="Commande validée" %}
+                {%else%}
+                    {% set valid="Commande en attende de validation" %}
+                {%endif %}
+
+                {% if first ==1 %}
+                    <div>
+                        <div class="col-xs-3" style="margin-left: 1%; margin-bottom: 20px;"> <strong>Numéro de commande : {{commande[0].numCommande }}</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Date d'achat : {{ produit.date|date('m-d-Y')|e }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{valid}} </div>
+                        {% set first=0 %}
+                    {%endif%}   
+                    {% if numcom == produit.numCommande|e %}
+                        <div class="col-xs-3 blockprodcommande" style="margin-bottom: 130px; ">
+                            <span style="position: absolute; margin-bottom:50px; font-size:20px;" >{{ produit.idProduit.getNomProduit()|e }}</span>
+                            <br>
+                            <span style="position: absolute; margin-top: 20px;"> <a href="/produit/{{produit.idProduit.getId()|e}}"><img src="{{ produit.idProduit.getPhotoProduit()|e }}" style=" width:100px; height:100px;"/></a></span>
+                            <span class='descriptprodcom' style="position: absolute; margin-left: 110px; margin-top:35px;">Quantité : {{ produit.qte|e }}<br> Prix : {{ produit.prix|e }}€ <br>Prix unitaire : {{ produit.idProduit.getPrixProduit()|e }}€ </span>
+                                {% set numcom=produit.numCommande|e%}
+                        </div>
+
+                    {%endif%}
+                    {% set total = total+produit.prix|e%}
+                {%endfor%}
+                <span style="position: absolute; margin-top:30px; font-size: 20px; margin-left: 600px;">Total : {{total}}€</span>
+            </div>
+        </div>
+        {#        {%endif%}#}
+    </div>
+
+{% endblock body %}

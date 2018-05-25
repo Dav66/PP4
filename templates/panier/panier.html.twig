@@ -38,12 +38,12 @@
                                         {#<a type="button" class="btn btn-sm btn-outline-secondary col-lg-3 text-gold" disabled="disabled" style="background-color:black;">+</a>
                                          <a type="button" class="btn btn-sm btn-outline-secondary col-lg-3 text-gold" disabled="disabled" style="background-color:black;">-</a>#}
 
-                                        <a type="button" class="btn btn-sm btn-outline-secondary col-lg-3 text-gold"href="" style="background-color:black; text-align: center;">+</a>
-                                        <a type="button" class="btn btn-sm btn-outline-secondary col-lg-3 text-gold"href="" style="background-color:black; text-align: center;">-</a>
+                                        <a type="button" class="btn btn-sm btn-outline-secondary col-lg-3 text-gold"href="/plusExemplaireProdPanier/{{produit.id|e}}" style="background-color:black; text-align: center;">+</a>
+                                        <a type="button" class="btn btn-sm btn-outline-secondary col-lg-3 text-gold"href="/moinsExemplaireProdPanier/{{produit.id|e}}" style="background-color:black; text-align: center;">-</a>
 {#        <a type="button" class="btn btn-sm btn-outline-secondary col-lg-3 text-gold"href="/retireExemplaireProdPanier/{{path ("retireExemplaireProdPanier",{'id':produit.id,'user':produit.user})}}" style="background-color:black">-</a>#}
                                     </td>
                                     <td>
-                                        <a href="{#{{ path('supprPanier', { 'id': produit.getIdProduit.getId }) }}/retireExemplaireProdPanier/{{produit.idProduit}}#}" style="font-size: 11px;">Supprimer</a>
+                                        <a href="{#{{/retireExemplaireProdPanier/{{produit.idProduit}}#}/suppTupleProdPanier/{{produit.id|e}}" style="font-size: 11px;">Supprimer</a>
                                     </td>
                                 </tr>
                                 {% set total = total + produit.prix|e %}
@@ -65,9 +65,11 @@
 {% endif %}
 
 <div class="col-lg-4">
-            <a class="btn btn-sm btn-outline-secondary col-lg-3 text-gold"href="" style="background-color:black;">Vider le coffre</a>
+            <a class="btn btn-sm btn-outline-secondary col-lg-3 text-gold"href="{#/supprPanier/{{produit.id|e}}#}" style="background-color:black;">Vider le coffre</a>
    
 </div>
-
+            <div class="container">
+            <a class="btn btn-sm btn-outline-secondary col-lg-12 text-gold"href="/validPanier" style="background-color:black;">Valider mon coffre</a>
+</div>
 {% endblock body %}
 

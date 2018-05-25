@@ -1,10 +1,58 @@
 {%extends "base.html.twig"%}
-{% block body %}
+{% block body %} 
+    
 {#    Si le pas de commandes#}
     {% if vide %}
         <legend style="text-align:center"> Liste des commandes</legend>
         <div>
             <p style="text-align:center">Pas de commandes !</p>
         </div>
-        {% endif %}
+        {%else%}
+            <div class='col-xs-12'>
+                {% set numcom=commande[0].numCommande %}
+                {% set first=1 %}
+                {% set margetop = -75 %}
+                {% set total=0 %}
+                {% for produit in commande %}
+                    {%if produit.estValid == 1 %}
+                        {% set valid="Commande validée" %}
+                    {%else%}
+                        {% set valid="Commande en attende de validation" %}
+                    {%endif %}
+
+                    {% if first ==1 %}
+                        <div class="col-xs-9 numcommande">
+                            <div class="col-xs-3" style="margin-left: 1%;"> <strong>Numéro de commande : {{commande[0].numCommande }}</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Date d'achat : {{ produit.date|date('d-m-Y')|e }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{valid}} &nbsp;&nbsp;&nbsp;&nbsp; <a style='color:#8B4513;' href="/pdf2/{{produit.numCommande|e}}">Télécharger le pdf</a> </div>
+                            {% set first=0 %}
+                            {% set margetop = -35 %}
+                        {%endif%}   
+                        {% if numcom == produit.numCommande|e %}
+                            <div class="col-xs-3 blockprodcommande">
+                                <a href="/produit/{{produit.idProduit.getId()|e}}"><img src="{{ produit.idProduit.getPhotoProduit()|e }}" class="imgcommande"/></a>
+                                <span class='nomprodcom'>  <a style='color:#8B4513;' href="/produit/{{produit.idProduit.getId()|e}}">{{ produit.idProduit.getNomProduit()|e }}</a></span>
+                                <span class='descriptprodcom'>Quantité : {{ produit.qte|e }}&nbsp; |&nbsp; Prix : {{ produit.prix|e }}€ &nbsp;| &nbsp;Prix unitaire : {{ produit.idProduit.getPrixProduit()|e }}€ </span>
+                                {% set numcom=produit.numCommande|e%}
+                            </div>
+                            {% set margetop = margetop -40%}
+                        {%else%}
+                            <span class="totalcommande" style="margin-top: {{margetop}}px;">Total : {{total}}€</span>
+                            {% set margetop = -75%}
+                            {% set total = 0%}
+                        </div> {# ferme le div d'en dessous car si if passe il s'ouvre pas #}
+                        <div class="col-xs-9 numcommande" >
+                            <div class="col-xs-3" style="margin-left: 1%;"><strong> Numéro de commande : {{produit.numCommande|e }}</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Date d'achat : {{ produit.date|date('d-m-Y')|e }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{valid}}&nbsp;&nbsp;&nbsp;&nbsp; <a style='color:#8B4513;' href="/pdf2/{{produit.numCommande|e}}">Télécharger le pdf</a> </div>
+                            <div class="col-xs-3 blockprodcommande" >
+                                <a href="/produit/{{produit.idProduit.getId()|e}}"><img src="{{ produit.idProduit.getPhotoProduit()|e }}" class="imgcommande"/></a>
+                                <span  class='nomprodcom'>  <a style='color:#8B4513;' href="/produit/{{produit.idProduit.getId()|e}}">{{ produit.idProduit.getNomProduit()|e }}</a></span>
+                                <span class='descriptprodcom'>Quantité : {{ produit.qte|e }}&nbsp; |&nbsp; Prix : {{ produit.prix|e }}€ &nbsp;| &nbsp;Prix unitaire : {{ produit.idProduit.getPrixProduit()|e }}€ </span>
+                                {% set numcom=produit.numCommande|e%}
+                            </div>
+                        {%endif%}
+                        {% set total = total+produit.prix|e%}
+                    {%endfor%}
+                    <span style='margin-top: {{margetop}}px;' class="totalcommande">Total : {{total}}€</span>
+                </div>
+            </div>
+        {%endif%}
+    </div>
 {% endblock body %}
